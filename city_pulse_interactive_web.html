@@ -1,0 +1,1739 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f3eb">
+  <title>城市動脈 CITY PULSE｜現代社畜與爆肝日常的解壓縮指南</title>
+  <style>
+    :root {
+      --paper: #f6f3eb;
+      --card-bg: #ffffff;
+      --ink: #2b332d;
+      --muted: #5e665d;
+      --sage: #7d917f;
+      --sage-dark: #4d5f50;
+      --pulse-orange: #e06c3a;
+      --pulse-gold: #e5a93c;
+      --pulse-red: #d90429;
+      --muscle-base: #c88a78;
+      --muscle-line: #a66555;
+      --tendon-base: #e9e4d8;
+      --line: #ded8cb;
+      --dark-zone: #1c221e;
+      --serif: "Noto Serif TC", "Songti TC", serif;
+      --sans: "Noto Sans TC", system-ui, -apple-system, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+      padding-top: 90px;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; border: none; background: none; }
+
+    .wrap {
+      width: min(1200px, calc(100% - 48px));
+      margin: auto;
+    }
+
+    .nav-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 90px;
+      z-index: 999;
+      background: var(--paper);
+      border-bottom: 2px solid var(--line);
+      transition: background-color 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease;
+    }
+    .nav-bar.scrolled {
+      background: rgba(246, 243, 235, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      border-bottom-color: rgba(222, 216, 203, 0.7);
+    }
+    .nav-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+    .brand small {
+      display: block;
+      font: 11px var(--sans);
+      letter-spacing: .18em;
+      color: var(--muted);
+      font-weight: 400;
+      margin-top: 2px;
+    }
+    .navlinks {
+      display: flex;
+      gap: 32px;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+    .navlinks a:hover { color: var(--pulse-orange); }
+    .nav-cta {
+      border: 2px solid var(--ink);
+      padding: 10px 22px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 30px;
+      transition: .25s;
+    }
+    .nav-cta:hover {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .hero {
+      min-height: 540px;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      align-items: center;
+      gap: 6%;
+      padding: 50px 0 65px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--pulse-orange);
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font: clamp(38px, 5vw, 64px)/1.2 var(--serif);
+      letter-spacing: .04em;
+      margin: 12px 0 20px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(120deg, #e06c3a 0%, #e5a93c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 540px;
+      line-height: 1.9;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 32px;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--sage-dark);
+      color: #fff;
+      padding: 15px 28px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 30px;
+      box-shadow: 0 4px 15px rgba(77, 95, 80, .25);
+      transition: transform .2s, background .2s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      background: #39473b;
+    }
+    .text-link {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--muted);
+      border-bottom: 2px solid var(--muted);
+      padding-bottom: 2px;
+    }
+
+    .hero-art-card {
+      background: linear-gradient(145deg, #e8e3d5, #f3eee3);
+      border: 2px solid #ddd7c7;
+      border-radius: 24px;
+      padding: 30px;
+      min-height: 380px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.04);
+    }
+    .card-pulse-tag {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--sage-dark);
+      letter-spacing: .15em;
+    }
+    .art-illustration {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .art-illustration svg {
+      width: 100%;
+      max-height: 180px;
+    }
+    .art-footer-stat {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px dashed var(--line);
+      padding-top: 18px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .art-footer-stat strong {
+      color: var(--ink);
+      font-size: 16px;
+    }
+
+    .marquee {
+      background: #eae4d5;
+      padding: 14px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      color: var(--sage-dark);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: .1em;
+    }
+    .marquee span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: drift 26s linear infinite;
+    }
+    @keyframes drift { to { transform: translateX(-100%); } }
+
+    .intro {
+      padding: 90px 0 75px;
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 8%;
+    }
+    .section-kicker {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .15em;
+      color: var(--pulse-orange);
+      margin-bottom: 8px;
+    }
+    .intro h2, .section-head h2 {
+      font: clamp(30px, 3.5vw, 44px)/1.35 var(--serif);
+      margin: 10px 0 16px;
+    }
+    .intro-copy p {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 2;
+      margin-bottom: 20px;
+    }
+    .intro-copy strong { color: var(--ink); }
+    .stats-row {
+      display: flex;
+      gap: 25px;
+      margin-top: 30px;
+    }
+    .stat-pill {
+      background: #fff;
+      border: 1px solid var(--line);
+      padding: 16px 20px;
+      border-radius: 16px;
+      flex: 1;
+    }
+    .stat-pill b {
+      display: block;
+      font: 32px var(--serif);
+      color: var(--pulse-orange);
+      line-height: 1.1;
+    }
+    .stat-pill small {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .projection-section {
+      background: var(--dark-zone);
+      color: #f7f5ee;
+      padding: 110px 0 120px;
+      position: relative;
+    }
+    .projection-section .section-head p { color: #a7b0a7; }
+    .projection-section .section-kicker { color: var(--pulse-gold); }
+    .projection-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 65px;
+      margin-top: 50px;
+    }
+    .proj-stage {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 50px;
+      align-items: center;
+      background: #252d27;
+      border: 1px solid #3d4a40;
+      border-radius: 28px;
+      padding: 40px;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.4);
+    }
+    .proj-stage:nth-child(even) { grid-template-columns: 1.1fr 1fr; }
+    .proj-stage:nth-child(even) .proj-screen-box { order: 1; }
+    .proj-stage:nth-child(even) .proj-info { order: 2; }
+
+    .proj-screen-box {
+      background: #0f1311;
+      border: 2px solid #364339;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+    .screen-header-bar {
+      height: 34px;
+      background: #181f1a;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 8px;
+      border-bottom: 1px solid #29342b;
+    }
+    .screen-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #47574b;
+    }
+    .screen-dot.active {
+      background: #4ec9b0;
+      box-shadow: 0 0 8px #4ec9b0;
+    }
+    .screen-title-bar {
+      font-size: 12px;
+      letter-spacing: .12em;
+      color: #8da190;
+      margin-left: auto;
+      font-weight: 600;
+    }
+    .screen-viewport {
+      height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .screen-svg { width: 100%; height: 100%; }
+
+    .proj-info .stage-tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--pulse-gold);
+      background: rgba(229, 169, 60, 0.15);
+      border: 1px solid rgba(229, 169, 60, 0.4);
+      padding: 4px 12px;
+      border-radius: 12px;
+      margin-bottom: 14px;
+      letter-spacing: .08em;
+    }
+    .proj-info h3 {
+      font: 28px var(--serif);
+      margin: 0 0 14px;
+      color: #fff;
+    }
+    .step-bullets {
+      margin: 18px 0;
+      padding-left: 20px;
+      color: #cfd8ce;
+      font-size: 15px;
+      line-height: 1.9;
+    }
+    .step-bullets li { margin-bottom: 8px; }
+    .tech-tip-pill {
+      background: #19201b;
+      border-left: 4px solid var(--pulse-orange);
+      padding: 12px 18px;
+      border-radius: 0 10px 10px 0;
+      font-size: 13.5px;
+      color: #9cb09f;
+      line-height: 1.7;
+    }
+    .tech-tip-pill strong { color: #f0e6d6; }
+
+    .screen-control-btn {
+      display: block;
+      width: calc(100% - 30px);
+      margin: 10px auto 14px;
+      background: #2d382f;
+      border: 1px solid #5a725f;
+      color: #f0efe8;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 9px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      text-align: center;
+      transition: all .25s ease;
+    }
+    .screen-control-btn:hover {
+      background: var(--pulse-orange);
+      border-color: var(--pulse-orange);
+      color: #fff;
+    }
+
+    /* 光雕動作模擬動畫 Keyframes */
+    @keyframes animSquatMotion {
+      0%, 100% { transform: translateY(0); }
+      35% { transform: translateY(22px) scaleY(0.9); }
+      70% { transform: translateY(0) scaleY(1); }
+    }
+    @keyframes animSquatPulseRing {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      40% { transform: scale(0.7); opacity: 0.3; }
+      75% { transform: scale(1.4); opacity: 0.95; }
+    }
+    .motion-squat-active #skelGroup1 {
+      animation: animSquatMotion 2.2s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
+      transform-origin: 200px 200px;
+    }
+    .motion-squat-active #pulseRing1 {
+      animation: animSquatPulseRing 2.2s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
+      transform-origin: 200px 195px;
+    }
+
+    @keyframes animWingFlap {
+      0%, 100% { transform: scale(1); opacity: 0.35; }
+      50% { transform: scale(1.35) translateY(-8px); opacity: 0.95; }
+    }
+    @keyframes animArmSwing {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(-30deg) translateY(-8px); }
+    }
+    @keyframes animArmSwingR {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(30deg) translateY(-8px); }
+    }
+    .motion-wings-active #armLeft2 {
+      animation: animArmSwing 2.4s infinite ease-in-out;
+      transform-origin: 200px 75px;
+    }
+    .motion-wings-active #armRight2 {
+      animation: animArmSwingR 2.4s infinite ease-in-out;
+      transform-origin: 200px 75px;
+    }
+    .motion-wings-active #wingGlow2 {
+      animation: animWingFlap 2.4s infinite ease-in-out;
+      transform-origin: 200px 105px;
+    }
+
+    @keyframes animSpineSideBend {
+      0%, 100% { transform: rotate(0deg); }
+      30% { transform: rotate(-14deg); }
+      70% { transform: rotate(14deg); }
+    }
+    @keyframes animAuroraWave {
+      0%, 100% { transform: translateX(0) scaleY(1); opacity: 0.6; }
+      50% { transform: translateX(18px) scaleY(1.15); opacity: 0.95; }
+    }
+    .motion-bend-active #skelSpineGroup3 {
+      animation: animSpineSideBend 3s infinite ease-in-out;
+      transform-origin: 195px 210px;
+    }
+    .motion-bend-active #auroraBeam3 {
+      animation: animAuroraWave 3s infinite ease-in-out;
+      transform-origin: center;
+    }
+
+    .journey {
+      background: #ece7db;
+      padding: 90px 0 100px;
+    }
+    .section-head {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .section-head p {
+      font-size: 16px;
+      color: var(--muted);
+      margin: 0;
+    }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .step-card {
+      background: var(--paper);
+      border: 2px solid var(--line);
+      border-radius: 20px;
+      padding: 28px 20px;
+      text-align: center;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .step-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+      border-color: var(--sage);
+    }
+    .step-num {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--sage-dark);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font: 19px var(--serif);
+      margin: 0 auto 16px;
+    }
+    .step-card h3 {
+      font: 20px var(--serif);
+      margin: 0 0 10px;
+    }
+    .step-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    .guide-section {
+      padding: 90px 0 105px;
+    }
+    .role-cards-scroll {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 14px;
+      margin: 35px 0 25px;
+    }
+    @media (max-width: 1200px) {
+      .role-cards-scroll {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      }
+    }
+
+    .role-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--card-bg);
+      border: 2px solid var(--line);
+      border-radius: 20px;
+      padding: 20px 16px;
+      text-align: left;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all .2s ease;
+      min-height: 290px;
+    }
+    .role-card:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: #cfcac0;
+      transition: .2s;
+    }
+    .role-card:hover {
+      transform: translateY(-4px);
+      border-color: #baa795;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    }
+    .role-card.active {
+      transform: translateY(-6px);
+      border-color: var(--pulse-orange);
+      box-shadow: 0 14px 28px rgba(224, 108, 58, 0.16);
+      background: #fff;
+    }
+    .role-card.active:before {
+      background: linear-gradient(90deg, var(--pulse-orange), var(--pulse-gold));
+    }
+    .role-top-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      pointer-events: none;
+    }
+    .role-tag {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: #f1eddf;
+      color: var(--sage-dark);
+      letter-spacing: .05em;
+    }
+    .active-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--pulse-orange);
+      display: none;
+    }
+    .role-card.active .active-badge {
+      display: inline-block;
+    }
+    .role-icon-box {
+      font-size: 38px;
+      line-height: 1;
+      margin-bottom: 10px;
+      pointer-events: none;
+    }
+    .role-card h3 {
+      font: 19px var(--sans);
+      font-weight: 700;
+      margin: 0 0 4px;
+      color: var(--ink);
+      pointer-events: none;
+    }
+    .role-vibe {
+      font-size: 12.5px;
+      color: var(--pulse-orange);
+      font-weight: 600;
+      margin-bottom: 8px;
+      pointer-events: none;
+    }
+    .role-symptoms {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.6;
+      border-top: 1px dashed var(--line);
+      padding-top: 8px;
+      margin-top: auto;
+      pointer-events: none;
+    }
+
+    .workout-detail-board {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 24px;
+      padding: 38px;
+      margin-top: 25px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+      display: grid;
+      grid-template-columns: 1.05fr 1.15fr;
+      gap: 40px;
+    }
+    .detail-scenario {
+      border-right: 1px solid var(--line);
+      padding-right: 35px;
+      display: flex;
+      flex-direction: column;
+    }
+    .detail-scenario .character-name {
+      font: 28px var(--serif);
+      margin: 6px 0 12px;
+      color: var(--ink);
+    }
+    .humor-quote {
+      background: #fbf9f4;
+      border-left: 4px solid var(--pulse-orange);
+      padding: 14px 18px;
+      border-radius: 0 12px 12px 0;
+      font-size: 15px;
+      color: var(--ink);
+      font-style: italic;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .muscle-heatmap-container {
+      background: linear-gradient(150deg, #fdfbf7 0%, #f1ecdf 100%);
+      border: 1.5px solid #dfd8cb;
+      border-radius: 20px;
+      padding: 22px;
+      margin-bottom: 22px;
+      position: relative;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .heatmap-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #e2dbcd;
+    }
+    .heatmap-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .heatmap-legend {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .legend-bar {
+      width: 65px;
+      height: 8px;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #c88a78, #ef233c, #800f2f);
+    }
+    .anatomy-svg-box {
+      width: 100%;
+      height: 330px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .anatomy-svg {
+      height: 100%;
+      width: auto;
+      overflow: visible;
+      filter: drop-shadow(0 6px 14px rgba(77, 95, 80, 0.08));
+    }
+
+    .muscle-part {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .muscle-part.normal {
+      fill: var(--muscle-base);
+      stroke: var(--muscle-line);
+      stroke-width: 0.8;
+    }
+    .tendon-part {
+      fill: var(--tendon-base);
+      stroke: #d0c8b8;
+      stroke-width: 0.8;
+    }
+
+    @keyframes muscleStrainedPulse {
+      0% {
+        fill: #d90429;
+        filter: drop-shadow(0 0 3px rgba(217, 4, 41, 0.6));
+      }
+      50% {
+        fill: #ff4d6d;
+        filter: drop-shadow(0 0 10px rgba(255, 77, 109, 0.95)) brightness(1.2);
+      }
+      100% {
+        fill: #d90429;
+        filter: drop-shadow(0 0 3px rgba(217, 4, 41, 0.6));
+      }
+    }
+    .muscle-part.inflamed {
+      animation: muscleStrainedPulse 2.2s infinite ease-in-out;
+      stroke: #800f2f !important;
+      stroke-width: 1.5 !important;
+    }
+
+    .projection-preview {
+      background: #f4efe6;
+      border-radius: 14px;
+      padding: 16px 18px;
+      font-size: 14px;
+      color: var(--sage-dark);
+      line-height: 1.7;
+      margin-top: auto;
+    }
+    .projection-preview strong {
+      display: block;
+      color: var(--ink);
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .exercise-cards-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .exercise-action-card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px;
+      background: #faf8f2;
+    }
+    .action-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .action-header h4 {
+      font: 18px var(--sans);
+      font-weight: 700;
+      margin: 0;
+      color: var(--ink);
+    }
+    .action-header .reps-badge {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--pulse-orange);
+      background: #f9ede6;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+    .exercise-action-card p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin: 0 0 8px;
+    }
+    .benefit-tip {
+      font-size: 13px;
+      color: var(--sage-dark);
+      font-weight: 600;
+    }
+
+    .pain-pill {
+      font-size: 12px;
+      background: #fbeae8;
+      color: #b71c1c;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+      border: 1px solid #f3c2bc;
+    }
+
+    /* 底部行動呼籲 */
+    .closing {
+      background: linear-gradient(135deg, #4d5f50 0%, #354238 100%);
+      color: #f7f4ec;
+      padding: 85px 0;
+    }
+    .closing-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+    }
+    .closing h2 {
+      font: 36px var(--serif);
+      margin: 10px 0 14px;
+    }
+    .closing p {
+      font-size: 16px;
+      color: #d1dacd;
+      line-height: 1.9;
+      max-width: 600px;
+    }
+    .btn-gold {
+      background: var(--pulse-gold);
+      color: #2b332d;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px 32px;
+      border-radius: 30px;
+      box-shadow: 0 6px 20px rgba(229, 169, 60, 0.3);
+      white-space: nowrap;
+      transition: transform .2s;
+    }
+    .btn-gold:hover { transform: translateY(-3px); }
+
+    .footer {
+      padding: 35px 0 45px;
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 14px;
+      letter-spacing: .06em;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 1020px) {
+      .hero { grid-template-columns: 1fr; gap: 40px; }
+      .intro { grid-template-columns: 1fr; gap: 30px; }
+      .proj-stage, .proj-stage:nth-child(even) { grid-template-columns: 1fr; }
+      .proj-stage:nth-child(even) .proj-screen-box { order: 0; }
+      .workout-detail-board { grid-template-columns: 1fr; }
+      .detail-scenario { border-right: none; border-bottom: 1px solid var(--line); padding-bottom: 30px; padding-right: 0; }
+      .steps-grid { grid-template-columns: 1fr 1fr; }
+      .closing-inner { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 600px) {
+      .navlinks { display: none; }
+      .hero h1 { font-size: 38px; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .role-cards-scroll { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; }
+      .role-card { min-width: 210px; scroll-snap-align: start; }
+      .workout-detail-board { padding: 24px 20px; }
+      .stats-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav-bar" id="mainNavBar">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top">
+        城市動脈 CITY PULSE
+        <small>臺中綠美圖 · 辦公室與生活微肌力互動展</small>
+      </a>
+      <nav class="navlinks">
+        <a href="#about">展覽亮點</a>
+        <a href="#projections">沉浸光雕展區</a>
+        <a href="#journey">闖關旅程</a>
+        <a href="#roles">角色微伸展</a>
+      </nav>
+      <a class="nav-cta" href="#projections">體驗核心光雕 ↗</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="wrap hero">
+      <div>
+        <span class="badge">🔥 運動部倡議 × 臺中綠美圖光雕特展</span>
+        <h1>現代社畜與爆肝日常的<br><em>解壓縮指南</em></h1>
+        <p>不用換運動服，更不用在跑步機上氣喘吁吁。走進綠美圖光雕展廳，透過 3 個生活微動作打破久坐緊繃。用肢體喚醒城市動脈，並把真正帶得走的放鬆運動習慣帶回日常！</p>
+        <div class="hero-actions">
+          <a class="btn-primary" href="#projections">探索 3 大核心光雕畫面 <span>↓</span></a>
+          <a class="text-link" href="#roles">挑選 7 大受災角色</a>
+        </div>
+      </div>
+
+      <div class="hero-art-card">
+        <div>
+          <span class="card-pulse-tag">LIVE PULSE FEED · 即時動脈</span>
+          <h3 style="font: 24px var(--serif); margin: 8px 0 0;">綠美圖展廳：今日已解壓縮</h3>
+        </div>
+        
+        <div class="art-illustration">
+          <svg viewBox="0 0 200 120" fill="none">
+            <circle cx="100" cy="60" r="45" stroke="#e06c3a" stroke-width="4" stroke-dasharray="6 6"/>
+            <circle cx="100" cy="60" r="28" fill="#4d5f50" opacity=".15"/>
+            <path d="M40 60 H70 L85 30 L100 90 L115 45 L130 60 H160" stroke="#e06c3a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div style="font-size: 15px; font-weight: 600; color: var(--ink);">AI 骨架影像分析中 · 零負擔微運動</div>
+        </div>
+
+        <div class="art-footer-stat">
+          <div><strong>4,820 次</strong><br>全場微肌力動作累積</div>
+          <div style="text-align: right;"><strong>89.4%</strong><br>現場闖關完成率</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 跑馬燈 -->
+    <div class="marquee">
+      <span>
+        ⚡ 站起夾臀 3 秒，下肢動脈重新流動　✳　低頭切模型脖子快斷？雙手抱頭開展胸椎　✳　在臺中綠美圖遇見光影與好體態　✳　運動部 7 天線上挑戰同步啟動中！　✳　
+      </span>
+    </div>
+
+    <!-- 理念介紹 -->
+    <section class="wrap intro" id="about">
+      <div>
+        <div class="section-kicker">01 / CONCEPT</div>
+        <h2>運動不該是負擔，<br>而是日常的深呼吸。</h2>
+      </div>
+      <div class="intro-copy">
+        <p><strong>《城市動脈：辦公室解壓縮指南》</strong>顛覆傳統運動必須汗流浹背的刻板印象。針對現代上班族與學生長時間伏案、滑手機、趕作業的身體痛點，我們在綠美圖以純淨光雕與高精準度電腦視覺，打造「零壓力」的互動運動體驗。</p>
+        <p>每一個微小動作都對應人體工學與肌力喚醒，結束後還能領取專屬「生活放鬆小卡」，讓健康的節奏在日常中延續。</p>
+        
+        <div class="stats-row">
+          <div class="stat-pill">
+            <b>07 款</b>
+            <small>幽默共鳴職業情境</small>
+          </div>
+          <div class="stat-pill">
+            <b>60 秒</b>
+            <small>無痛學會生活微動作</small>
+          </div>
+          <div class="stat-pill">
+            <b>07 天</b>
+            <small>運動部線上打卡抽好禮</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="projection-section" id="projections">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-kicker">02 / CORE EXPERIENCE</div>
+          <h2>核心光雕體驗流程與畫面模擬</h2>
+          <p>高精準度攝影機捕捉人體關節點，點擊「啟動動作模擬」觀看骨架運算與空間光雕反饋。</p>
+        </div>
+
+        <div class="projection-grid">
+          
+          <!-- 光雕關卡 1 -->
+          <article class="proj-stage">
+            <div class="proj-screen-box" id="screenBox1">
+              <div class="screen-header-bar">
+                <span class="screen-dot active"></span>
+                <span class="screen-dot"></span>
+                <span class="screen-dot"></span>
+                <span class="screen-title-bar" id="stageStatus1">STAGE 01 · 骨架判定中</span>
+              </div>
+              <div class="screen-viewport" id="screenView1">
+                <svg class="screen-svg" viewBox="0 0 400 240" fill="none">
+                  <path d="M0 200 C100 180, 300 180, 400 200" stroke="#253528" stroke-width="2"/>
+                  <path d="M0 220 C100 195, 300 195, 400 220" stroke="#1d2920" stroke-width="2"/>
+                  <!-- 骨架群組 (含動畫 ID) -->
+                  <g id="skelGroup1" stroke="#4ec9b0" stroke-width="3.5" stroke-linecap="round">
+                    <circle cx="200" cy="55" r="9" fill="#4ec9b0"/>
+                    <line x1="200" y1="64" x2="200" y2="120"/>
+                    <line x1="200" y1="120" x2="175" y2="155"/>
+                    <line x1="175" y1="155" x2="185" y2="195"/>
+                    <line x1="200" y1="120" x2="225" y2="155"/>
+                    <line x1="225" y1="155" x2="215" y2="195"/>
+                    <line x1="200" y1="80" x2="160" y2="95"/>
+                    <line x1="200" y1="80" x2="240" y2="95"/>
+                  </g>
+                  <!-- 地面金光漣漪 -->
+                  <g id="pulseRing1">
+                    <ellipse cx="200" cy="195" rx="70" ry="16" stroke="#e5a93c" stroke-width="3" opacity="0.85"/>
+                    <ellipse cx="200" cy="195" rx="120" ry="24" stroke="#e06c3a" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.7"/>
+                    <ellipse cx="200" cy="195" rx="170" ry="32" stroke="#4ec9b0" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.5"/>
+                  </g>
+                </svg>
+              </div>
+              <button type="button" class="screen-control-btn" id="btnStage1" onclick="toggleStageSimulation(1)">啟動深蹲動作模擬 ⟳</button>
+            </div>
+            
+            <div class="proj-info">
+              <span class="stage-tag">關卡 01 · 下肢循環喚醒</span>
+              <h3>辦公室無痕起立 ➔ 草悟道金色脈衝</h3>
+              <ol class="step-bullets">
+                <li><strong>踏入定位光圈：</strong> 站定位於投影綠圈內，正視前方感應器。</li>
+                <li><strong>執行微深蹲：</strong> 臀部輕緩向後坐低、停留 2 秒後站起並夾緊臀部。</li>
+                <li><strong>觸發光影流向：</strong> 站直鎖定的瞬間，金色動脈能量波自腳下強烈向外爆發，沿著地板衝刷至展牆，將草悟道綠廊一節節點亮。</li>
+              </ol>
+              <div class="tech-tip-pill">
+                <strong>視覺與技術原理：</strong><br>
+                MediaPipe 捕捉髖部（Hip）與膝蓋（Knee）垂直位移角度。達標時觸發粒子發射器，模擬血液自下肢回流心臟的動脈擴散感。
+              </div>
+            </div>
+          </article>
+
+          <!-- 光雕關卡 2 -->
+          <article class="proj-stage">
+            <div class="proj-screen-box" id="screenBox2">
+              <div class="screen-header-bar">
+                <span class="screen-dot active"></span>
+                <span class="screen-dot"></span>
+                <span class="screen-dot"></span>
+                <span class="screen-title-bar" id="stageStatus2">STAGE 02 · 展翅夾背中</span>
+              </div>
+              <div class="screen-viewport" id="screenView2">
+                <svg class="screen-svg" viewBox="0 0 400 240" fill="none">
+                  <!-- 背後光羽翼 (支援拍動動畫) -->
+                  <g id="wingGlow2">
+                    <path d="M200 100 Q120 20 60 80 Q130 110 200 105" fill="rgba(224, 108, 58, 0.35)" stroke="#e06c3a" stroke-width="2.5"/>
+                    <path d="M200 100 Q280 20 340 80 Q270 110 200 105" fill="rgba(224, 108, 58, 0.35)" stroke="#e06c3a" stroke-width="2.5"/>
+                    <path d="M200 110 Q100 60 40 140 Q130 140 200 115" fill="rgba(229, 169, 60, 0.25)" stroke="#e5a93c" stroke-width="2"/>
+                    <path d="M200 110 Q300 60 360 140 Q270 140 200 115" fill="rgba(229, 169, 60, 0.25)" stroke="#e5a93c" stroke-width="2"/>
+                  </g>
+                  <g stroke="#f6f3eb" stroke-width="3.5" stroke-linecap="round">
+                    <circle cx="200" cy="50" r="9" fill="#f6f3eb"/>
+                    <line x1="200" y1="59" x2="200" y2="130"/>
+                    <line x1="200" y1="130" x2="190" y2="205"/>
+                    <line x1="200" y1="130" x2="210" y2="205"/>
+                    <!-- 動態雙手 (可擺動) -->
+                    <g id="armLeft2">
+                      <line x1="200" y1="75" x2="160" y2="85"/>
+                      <line x1="160" y1="85" x2="140" y2="50"/>
+                    </g>
+                    <g id="armRight2">
+                      <line x1="200" y1="75" x2="240" y2="85"/>
+                      <line x1="240" y1="85" x2="260" y2="50"/>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+              <button type="button" class="screen-control-btn" id="btnStage2" onclick="toggleStageSimulation(2)">啟動 W-Y 展翅手臂模擬 ⟳</button>
+            </div>
+            
+            <div class="proj-info">
+              <span class="stage-tag">關卡 02 · 胸脊呼吸解鎖</span>
+              <h3>YW 展翅夾背 ➔ 中央公園綠意光翼</h3>
+              <ol class="step-bullets">
+                <li><strong>雙手比 W 往後夾緊：</strong> 手肘下沉夾緊肩胛骨，胸口自然前挺。</li>
+                <li><strong>向上延展推成 Y：</strong> 雙手向斜上方如展翅般展開，深吸氣 3 秒。</li>
+                <li><strong>觸發光影流向：</strong> 展廳正前方主牆面瞬間綻放宛如巨型光蝶的羽翼，中央公園花草藤蔓隨手臂擺動迅速蔓延盛開。</li>
+              </ol>
+              <div class="tech-tip-pill">
+                <strong>視覺與技術原理：</strong><br>
+                辨識雙肩胛骨（Scapula）後收距離與手腕斜上夾角。光雕採用動態流體算法，展現「胸腔被開啟、吸入新鮮氧氣」的暢快感。
+              </div>
+            </div>
+          </article>
+
+          <!-- 光雕關卡 3 -->
+          <article class="proj-stage">
+            <div class="proj-screen-box" id="screenBox3">
+              <div class="screen-header-bar">
+                <span class="screen-dot active"></span>
+                <span class="screen-dot"></span>
+                <span class="screen-dot"></span>
+                <span class="screen-title-bar" id="stageStatus3">STAGE 03 · 側身延展中</span>
+              </div>
+              <div class="screen-viewport" id="screenView3">
+                <svg class="screen-svg" viewBox="0 0 400 240" fill="none">
+                  <line x1="200" y1="0" x2="200" y2="240" stroke="#3fa296" stroke-width="4" stroke-dasharray="10 5" opacity="0.4"/>
+                  <!-- 極光流動束 -->
+                  <g id="auroraBeam3">
+                    <path d="M120 220 C 130 140, 220 70, 310 20" stroke="#4ec9b0" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M110 220 C 120 145, 210 75, 300 25" stroke="#e5a93c" stroke-width="2.5" stroke-linecap="round"/>
+                  </g>
+                  <!-- 側彎骨架群組 -->
+                  <g id="skelSpineGroup3" stroke="#4ec9b0" stroke-width="3.5" stroke-linecap="round">
+                    <circle cx="215" cy="55" r="9" fill="#4ec9b0"/>
+                    <path d="M215 64 Q210 100 195 130"/>
+                    <line x1="195" y1="130" x2="185" y2="210"/>
+                    <line x1="195" y1="130" x2="210" y2="210"/>
+                    <line x1="210" y1="80" x2="230" y2="105"/>
+                    <path d="M208 80 Q215 50 250 40" stroke="#e06c3a" stroke-width="3.5"/>
+                  </g>
+                </svg>
+              </div>
+              <button type="button" class="screen-control-btn" id="btnStage3" onclick="toggleStageSimulation(3)">啟動側腰擺盪模擬 ⟳</button>
+            </div>
+            
+            <div class="proj-info">
+              <span class="stage-tag">關卡 03 · 側軀與筋膜打通</span>
+              <h3>站姿弦月拉伸 ➔ 綠美圖建築能量貫通</h3>
+              <ol class="step-bullets">
+                <li><strong>單手扶腰過頭側彎：</strong> 單手向上高舉微側彎，感受緊繃側腰肋骨舒展。</li>
+                <li><strong>左右平衡切換：</strong> 左右各維持 3 秒，調整身體傾斜中軸。</li>
+                <li><strong>觸發光影流向：</strong> 兩側極光水瀑在天花板交匯，點亮綠美圖純白立面線條，射出貫穿展館的金色動脈光柱！</li>
+              </ol>
+              <div class="tech-tip-pill">
+                <strong>視覺與技術原理：</strong><br>
+                偵測脊椎（Spine）中軸彎曲弧度與重心平衡係數，完成全身光雕聯動，標誌個人運動活力達到滿載狀態。
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 闖關旅程 (4 步) -->
+    <section class="journey" id="journey">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-kicker">03 / INTERACTIVE FLOW</div>
+          <h2>4 步解壓旅程：點亮自己，也點亮城市</h2>
+          <p>循著光影引導，在綠美圖展廳內輕鬆完成專屬挑戰。</p>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-num">01</div>
+            <h3>認領職業災情</h3>
+            <p>在機台選擇最像你的「現代受災戶」身分，領取專屬痠痛解鎖任務與數位手冊。</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">02</div>
+            <h3>工位微肌力互動</h3>
+            <p>站在投影圈內完成 3 招生活微動作，攝影機即時捕捉骨架，觸發壯麗展牆光雕。</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">03</div>
+            <h3>品牌機能補給</h3>
+            <p>體驗穿戴手錶壓力釋放檢測、試用人體工學舒壓小物與機能健康補給。</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">04</div>
+            <h3>領取放鬆處方箋</h3>
+            <p>獲得個人光影美照小卡與 3 招動作圖解，掃碼加入運動部 7 天打卡挑戰！</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap guide-section" id="roles">
+      <div class="section-head" style="text-align: left; margin-bottom: 20px;">
+        <div class="section-kicker">04 / CHOOSE YOUR SQUAD</div>
+        <h2>選擇你的「日常受災角色」</h2>
+        <p>點選下方運動卡片，人體醫學圖將即時切換<strong>精確解剖肌群熱區（紅光脈衝）</strong>與專屬微肌力處方：</p>
+      </div>
+
+      <!-- 7 大職業卡片清單 -->
+      <div class="role-cards-scroll" role="tablist">
+        
+        <button type="button" class="role-card active" data-role="office" role="tab" aria-selected="true">
+          <div>
+            <div class="role-top-meta">
+              <span class="role-tag">久坐 99%</span>
+              <span class="active-badge">✓ 選擇中</span>
+            </div>
+            <div class="role-icon-box">💻</div>
+            <h3>鍵盤打字俠</h3>
+            <div class="role-vibe">上班族 · 屁股黏在椅子上</div>
+          </div>
+          <div class="role-symptoms">
+            <strong>痠痛核心：</strong><br>上斜方肌緊縮、下背豎脊肌僵直、臀大肌深度休眠。
+          </div>
+        </button>
+
+        <button type="button" class="role-card" data-role="student" role="tab" aria-selected="false">
+          <div>
+            <div class="role-top-meta">
+              <span class="role-tag">爆肝 100%</span>
+              <span class="active-badge">✓ 選擇中</span>
+            </div>
+            <div class="role-icon-box">📐</div>
+            <h3>熬夜切模型生</h3>
+            <div class="role-vibe">設計建築系 · 雷切到半夜</div>
+          </div>
+          <div class="role-symptoms">
+            <strong>痠痛核心：</strong><br>頸夾肌烏龜頸、前臂腕屈肌發炎、菱形肌過度牽拉。
+          </div>
+        </button>
+
+        <button type="button" class="role-card" data-role="gamer" role="tab" aria-selected="false">
+          <div>
+            <div class="role-top-meta">
+              <span class="role-tag">低頭 98%</span>
+              <span class="active-badge">✓ 選擇中</span>
+            </div>
+            <div class="role-icon-box">🎮</div>
+            <h3>低頭電競手遊俠</h3>
+            <div class="role-vibe">遊戲玩家 · 狂按搓招沉浸中</div>
+          </div>
+          <div class="role-symptoms">
+            <strong>痠痛核心：</strong><br>大拇指橈側伸肌腱鞘緊繃、胸椎後凸圓肩、後頸肌群高壓。
+          </div>
+        </button>
+
+        <button type="button" class="role-card" data-role="courier" role="tab" aria-selected="false">
+          <div>
+            <div class="role-top-meta">
+              <span class="role-tag">風馳 95%</span>
+              <span class="active-badge">✓ 選擇中</span>
+            </div>
+            <div class="role-icon-box">🛵</div>
+            <h3>穿梭風之子</h3>
+            <div class="role-vibe">外送員 · 趕紅綠燈催油門</div>
+          </div>
+          <div class="role-symptoms">
+            <strong>痠痛核心：</strong><br>腰方肌單側痙攣、手腕正中神經震動疲勞、梨狀肌壓迫。
+          </div>
+        </button>
+
+        <button type="button" class="role-card" data-role="retail" role="tab" aria-selected="false">
+          <div>
+            <div class="role-top-meta">
+              <span class="role-tag">久站 96%</span>
+              <span class="active-badge">✓ 選擇中</span>
+            </div>
+            <div class="role-icon-box">👠</div>
+            <h3>久站專櫃美業師</h3>
+            <div class="role-vibe">專櫃門市 · 穿包鞋站整天</div>
+          </div>
+          <div class="role-symptoms">
+            <strong>痠痛核心：</strong><br>足底筋膜高壓、小腿腓腸肌靜脈回流差、腰椎前凸疲勞。
+          </div>
+        </button>
+
+        <button type="button" class="role-card" data-role="teacher" role="tab" aria-selected="false">
+          <div>
+            <div class="role-top-meta">
+              <span class="role-tag">鐵腿 92%</span>
+              <span class="active-badge">✓ 選擇中</span>
+            </div>
+            <div class="role-icon-box">📚</div>
+            <h3>講台站樁師</h3>
+            <div class="role-vibe">學校老師 · 批改作業眼神死</div>
+          </div>
+          <div class="role-symptoms">
+            <strong>痠痛核心：</strong><br>右肩棘上肌滑囊炎、小腿比目魚肌腫脹、腰薦椎承重壓力。
+          </div>
+        </button>
+
+        <button type="button" class="role-card" data-role="sales" role="tab" aria-selected="false">
+          <div>
+            <div class="role-top-meta">
+              <span class="role-tag">壓力 98%</span>
+              <span class="active-badge">✓ 選擇中</span>
+            </div>
+            <div class="role-icon-box">💼</div>
+            <h3>奪命奔走業務</h3>
+            <div class="role-vibe">業務專員 · 夾手機提重物包</div>
+          </div>
+          <div class="role-symptoms">
+            <strong>痠痛核心：</strong><br>單側斜方肌大鼓包、側身闊背肌代償、骨盆重心偏移。
+          </div>
+        </button>
+
+      </div>
+
+      <!-- 詳情展示看版 -->
+      <div class="workout-detail-board" id="workoutBoard" role="tabpanel"></div>
+    </section>
+
+    <!-- 底部行動呼籲 -->
+    <section class="closing">
+      <div class="wrap closing-inner">
+        <div>
+          <div class="section-kicker" style="color: var(--pulse-gold);">TAKE IT HOME · 習慣正在養成</div>
+          <h2>每天 3 分鐘，把活力續約 7 天！</h2>
+          <p>完成綠美圖展廳體驗，現場領取實體放鬆圖卡。掃描卡片上的專屬 QR Code 加入運動部線上應援打卡，即可抽取運動智能手錶與品牌運動鞋！</p>
+        </div>
+        <a class="btn-gold" href="#projections">觀看光雕動作分解 <span>↗</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap footer">
+    <div>
+      <strong>城市動脈 CITY PULSE</strong> ｜ 臺中綠美圖特展
+      <div style="font-size: 13px; margin-top: 4px;">指導單位：運動部 · 執行團隊：TNDA 數位互動組</div>
+    </div>
+    <div>© 2026 CITY PULSE. All Rights Reserved.</div>
+  </footer>
+
+  <script>
+    // 導覽列滾動監聽
+    const navBar = document.getElementById('mainNavBar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        navBar.classList.add('scrolled');
+      } else {
+        navBar.classList.remove('scrolled');
+      }
+    });
+
+    /* ========================================================
+       專業解剖學風格肌肉向量產生器 (Anatomy SVG Builder)
+    ======================================================== */
+    function generateAnatomicalMuscleSVG(inflamedMuscles = []) {
+      const isInf = (name) => inflamedMuscles.includes(name) ? 'inflamed' : 'normal';
+
+      return `
+        <svg class="anatomy-svg" viewBox="0 0 200 320" fill="none">
+          <defs>
+            <linearGradient id="muscleShade" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#cf8e7e" />
+              <stop offset="100%" stop-color="#b06454" />
+            </linearGradient>
+            <pattern id="fiberPattern" width="4" height="4" patternUnits="userSpaceOnUse">
+              <path d="M 0,2 Q 2,0 4,2" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="0.6"/>
+            </pattern>
+          </defs>
+
+          <!-- 人體骨架與肌腱底層 -->
+          <g class="tendon-part">
+            <!-- 頭部輪廓 (背面) -->
+            <path d="M 100,16 C 85,16 78,28 78,42 C 78,54 86,60 100,60 C 114,60 122,54 122,42 C 122,28 115,16 100,16 Z" />
+            <!-- 胸腰腱膜 (白線菱形筋膜中心) -->
+            <path d="M 100,105 L 116,145 L 100,178 L 84,145 Z" />
+            <!-- 頸韌帶與脊椎中線 -->
+            <line x1="100" y1="45" x2="100" y2="185" stroke="#d5cebd" stroke-width="2" stroke-dasharray="2 3"/>
+            <!-- 膝後腱部與跟腱 -->
+            <path d="M 72,216 L 78,226 L 72,236 Z" />
+            <path d="M 128,216 L 122,226 L 128,236 Z" />
+            <rect x="76" y="285" width="8" height="22" rx="3" />
+            <rect x="116" y="285" width="8" height="22" rx="3" />
+          </g>
+
+          <!-- 獨立肌肉群塊 (可由 inflamed 類別點亮紅色脈衝發光) -->
+          <g class="muscles-layer">
+            
+            <!-- 1. 後頸肌群 (Splenius capitis & cervicis) -->
+            <path id="m-neck" class="muscle-part ${isInf('neck')}"
+                  d="M 94,45 C 91,52 87,62 82,68 L 96,68 L 100,50 Z" />
+            <path id="m-neck-r" class="muscle-part ${isInf('neck')}"
+                  d="M 106,45 C 109,52 113,62 118,68 L 104,68 L 100,50 Z" />
+
+            <!-- 2. 上斜方肌 (Trapezius Superior) -->
+            <path id="m-trapezius-l" class="muscle-part ${isInf('trapezius') || isInf('trapezius-l')}"
+                  d="M 82,68 C 72,70 60,78 54,88 L 74,94 L 98,72 Z" />
+            <path id="m-trapezius-r" class="muscle-part ${isInf('trapezius') || isInf('trapezius-r')}"
+                  d="M 118,68 C 128,70 140,78 146,88 L 126,94 L 102,72 Z" />
+
+            <!-- 3. 中下斜方肌與菱形肌 (Trapezius Inferior & Rhomboids) -->
+            <path id="m-rhomboid" class="muscle-part ${isInf('rhomboid') || isInf('thoracic')}"
+                  d="M 98,74 L 75,95 L 85,128 L 99,105 Z" />
+            <path id="m-rhomboid-r" class="muscle-part ${isInf('rhomboid') || isInf('thoracic')}"
+                  d="M 102,74 L 125,95 L 115,128 L 101,105 Z" />
+
+            <!-- 4. 三角肌後束 (Deltoideus Posterior) -->
+            <path id="m-deltoid-l" class="muscle-part ${isInf('deltoid-l') || isInf('shoulder')}"
+                  d="M 52,87 C 46,94 40,106 38,118 C 45,120 50,116 54,106 L 56,92 Z" />
+            <path id="m-deltoid-r" class="muscle-part ${isInf('deltoid-r') || isInf('shoulder')}"
+                  d="M 148,87 C 154,94 160,106 162,118 C 155,120 150,116 146,106 L 144,92 Z" />
+
+            <!-- 5. 肱三頭肌 (Triceps Brachii) -->
+            <path id="m-triceps-l" class="muscle-part ${isInf('arm-l')}"
+                  d="M 38,119 C 34,130 30,144 28,155 L 36,156 C 41,146 45,134 46,122 Z" />
+            <path id="m-triceps-r" class="muscle-part ${isInf('arm-r')}"
+                  d="M 162,119 C 166,130 170,144 172,155 L 164,156 C 159,146 155,134 154,122 Z" />
+
+            <!-- 6. 前臂後側伸肌群 (Forearm Extensors) -->
+            <path id="m-forearm-l" class="muscle-part ${isInf('forearm-l') || isInf('forearm')}"
+                  d="M 27,156 C 24,168 20,182 17,194 L 25,195 C 29,183 33,170 35,157 Z" />
+            <path id="m-forearm-r" class="muscle-part ${isInf('forearm-r') || isInf('forearm')}"
+                  d="M 173,156 C 176,168 180,182 183,194 L 175,195 C 171,183 167,170 165,157 Z" />
+
+            <!-- 手掌 -->
+            <path d="M 17,195 C 15,202 12,212 11,218 L 22,216 L 24,196 Z" fill="#cf8e7e" />
+            <path d="M 183,195 C 185,202 188,212 189,218 L 178,216 L 176,196 Z" fill="#cf8e7e" />
+
+            <!-- 7. 背闊肌與腰方肌 (Latissimus Dorsi & Lower Back) -->
+            <path id="m-lats-l" class="muscle-part ${isInf('lower-back') || isInf('lats-l')}"
+                  d="M 73,98 C 66,110 63,128 62,148 L 84,146 L 85,129 Z" />
+            <path id="m-lats-r" class="muscle-part ${isInf('lower-back') || isInf('lats-r')}"
+                  d="M 127,98 C 134,110 137,128 138,148 L 116,146 L 115,129 Z" />
+
+            <!-- 8. 臀大肌 (Gluteus Maximus) -->
+            <path id="m-glute-l" class="muscle-part ${isInf('glute') || isInf('glute-l')}"
+                  d="M 64,152 C 58,165 60,188 68,198 C 76,206 88,206 97,198 L 99,178 L 84,150 Z" />
+            <path id="m-glute-r" class="muscle-part ${isInf('glute') || isInf('glute-r')}"
+                  d="M 136,152 C 142,165 140,188 132,198 C 124,206 112,206 103,198 L 101,178 L 116,150 Z" />
+
+            <!-- 9. 大腿後側膕旁肌 (Hamstrings) -->
+            <path id="m-hamstring-l" class="muscle-part ${isInf('hamstring') || isInf('leg-l')}"
+                  d="M 70,202 C 67,215 66,232 68,246 L 80,246 C 85,232 87,216 88,202 Z" />
+            <path id="m-hamstring-r" class="muscle-part ${isInf('hamstring') || isInf('leg-r')}"
+                  d="M 130,202 C 133,215 134,232 132,246 L 120,246 C 115,232 113,216 112,202 Z" />
+
+            <!-- 10. 小腿腓腸肌與比目魚肌 (Gastrocnemius & Soleus) -->
+            <path id="m-calf-l" class="muscle-part ${isInf('calf') || isInf('calf-l')}"
+                  d="M 69,248 C 64,258 65,274 72,284 L 84,284 C 86,274 85,258 80,248 Z" />
+            <path id="m-calf-r" class="muscle-part ${isInf('calf') || isInf('calf-r')}"
+                  d="M 131,248 C 136,258 135,274 128,284 L 116,284 C 114,274 115,258 120,248 Z" />
+
+            <!-- 足底肌腱筋膜 (Plantar Fascia) -->
+            <path id="m-foot-l" class="muscle-part ${isInf('foot')}"
+                  d="M 74,307 C 72,311 73,315 76,317 L 86,317 C 88,313 86,307 83,307 Z" />
+            <path id="m-foot-r" class="muscle-part ${isInf('foot')}"
+                  d="M 126,307 C 128,311 127,315 124,317 L 114,317 C 112,313 114,307 117,307 Z" />
+          </g>
+
+          <rect x="0" y="0" width="200" height="320" fill="url(#fiberPattern)" opacity="0.35" pointer-events="none" />
+        </svg>
+      `;
+    }
+
+    /* 7 款完整角色資料庫 */
+    const roleDatabase = {
+      office: {
+        title: "打字鍵盤俠上班族",
+        quote: "「回不完的 Slack、改了 10 版的簡報，一整天下來屁股跟椅子幾乎融合成一體……」",
+        painZoneName: "上斜方肌（肩頸石化）＆ 臀大肌（久坐失憶休眠）",
+        inflamedMuscles: ["trapezius", "lower-back", "glute"],
+        painPills: ["上斜方肌緊縮", "胸腰筋膜僵硬", "臀大肌休眠失憶", "下肢靜脈回流差"],
+        projection: "光雕視覺回饋：當你站起夾臀並舒展肩背時，暗淡的辦公格子間地坪瞬間爆發金色光脈，將草悟道林蔭光影一層層向上刷亮！",
+        exercises: [
+          {
+            title: "辦公室無痕起立深蹲夾臀",
+            reps: "慢起慢坐 3 次 · 停留 2 秒",
+            desc: "自然從椅子站起，站直瞬間臀部夾緊收縮 2 秒，再輕緩坐下。假裝去倒水，無痛喚醒失憶下肢。",
+            tip: "💡 生活實用：每坐 50 分鐘順手做 3 下，徹底告別下半身冰冷與水腫。"
+          },
+          {
+            title: "鍵盤手背靠 W 轉 Y 展翅",
+            reps: "重複 3 回 · 每次深呼吸",
+            desc: "手肘下沉向後收緊肩胛骨比「W」，感受後背夾緊；接著向斜上方伸展成「Y」，打開緊繃胸部。",
+            tip: "💡 生活實用：等開會或等下載檔案時做，迅速校正圓肩與頭前傾。"
+          }
+        ]
+      },
+      student: {
+        title: "熬夜切模型設計生",
+        quote: "「雷射切割機排到半夜三點，白膠黏滿手指，低頭看模型墊低到脖子彷彿快折斷……」",
+        painZoneName: "頸夾肌（烏龜頸壓迫）＆ 橈側伸腕肌（美工刀勞損）",
+        inflamedMuscles: ["neck", "rhomboid", "forearm-r"],
+        painPills: ["頸椎 C7 關節過載", "菱形肌長期拉伸代償", "前臂屈腕肌痙攣", "上胸肋骨壓迫"],
+        projection: "光雕視覺回饋：當你雙手抱頭仰望展廳天花板時，模型桌雜亂的光影破裂，清爽的藍天光流傾瀉而下，洗滌全身疲憊！",
+        exercises: [
+          {
+            title: "抱頭胸椎仰伸伸展術",
+            reps: "後仰停留 3 次深呼吸 · 做 2 回",
+            desc: "雙手十指扣於後腦勺支撐頸椎，手肘張開，靠著椅背向後微仰，視線望向天花板，拉開胸骨肋間肌。",
+            tip: "💡 生活實用：黏完一組模型柱子就做一次，大幅減輕頸椎第 7 節壓力。"
+          },
+          {
+            title: "手腕白膠解封反向拉伸",
+            reps: "左右各維持 15 秒",
+            desc: "單手向前伸直掌心朝外，另一手握住指尖輕輕往回拉，感受前臂掌側肌肉徹底舒展放鬆。",
+            tip: "💡 生活實用：握筆、用美工刀 1 小時後的必備神救援招式。"
+          }
+        ]
+      },
+      gamer: {
+        title: "低頭電競手遊俠",
+        quote: "「連打五場積分排位賽，大拇指快要抽筋，脖子前傾僵硬得像水泥柱……」",
+        painZoneName: "橈骨莖突外展肌（媽媽手/手遊指）＆ 胸椎伸肌群（駝背圓肩）",
+        inflamedMuscles: ["neck", "forearm-l", "forearm-r", "thoracic"],
+        painPills: ["外展拇長肌狹窄腱鞘炎", "胸椎後凸胸肌短縮", "肩胛下肌緊繃", "視神經疲勞頭痛"],
+        projection: "光雕視覺回饋：雙手張開反向推展，地坪射出如賽博朋克光流的能量束，擊碎螢幕藍光雜訊！",
+        exercises: [
+          {
+            title: "電競手指反向波浪撫掌",
+            reps: "雙手十指互扣推展 15 秒",
+            desc: "十指交扣掌心向外向前推直，接著向上舉過頭頂，拉伸整條手臂內側筋膜與手指關節。",
+            tip: "💡 生活實用：每排完一場遊戲等待排隊時做，釋放拇指腱鞘壓力。"
+          },
+          {
+            title: "椅背反向開胸呼吸法",
+            reps: "深吸氣擴胸 3 次",
+            desc: "雙手垂放椅背後方十指扣緊，雙肩後轉挺胸，抬頭仰望 45 度，校正長時間低頭頭前傾。",
+            tip: "💡 生活實用：結束對局立刻重啟呼吸進氣量。"
+          }
+        ]
+      },
+      courier: {
+        title: "城市穿梭外送員",
+        quote: "「右手催油門催到發麻、單手看手機導航彎腰駝背，等個紅綠燈腰椎彷彿重擊……」",
+        painZoneName: "單側腰方肌（騎姿傾斜）＆ 橈骨腕管神經（機車手震麻）",
+        inflamedMuscles: ["lower-back", "forearm-r", "hamstring"],
+        painPills: ["單側腰方肌劇烈痙攣", "腕管正中神經震動壓迫", "胸腰筋膜撕扯", "臀中肌失衡"],
+        projection: "光雕視覺回饋：隨著身側大幅度彎曲延展，展牆瞬間拉出一道如同后豐鐵馬道自行車奔馳的極光軌道，打通全身經絡！",
+        exercises: [
+          {
+            title: "站姿單側弦月拉伸",
+            reps: "左右各維持 5 秒 · 做 2 組",
+            desc: "單手叉腰，另一手如撈月亮般跨過頭頂往對側延展，感受緊繃的側腰與背闊肌被一層層拉開。",
+            tip: "💡 生活實用：停等 90 秒長紅燈時立柱下車微拉，迅速解除腰部代償緊繃。"
+          },
+          {
+            title: "機車手腕抗震放鬆繞環",
+            reps: "雙向各轉動 10 圈",
+            desc: "雙手十指交扣，以放鬆的波浪節奏慢速旋轉手腕關節，促進腕隧道末梢血液循環。",
+            tip: "💡 生活實用：跑完高峰餐期休息喝水時，甩開手麻與僵硬。"
+          }
+        ]
+      },
+      retail: {
+        title: "久站專櫃美業師",
+        quote: "「踩著高跟鞋或薄底包鞋站滿 8 小時，腳底板刺痛，小腿脹得像灌了鉛水……」",
+        painZoneName: "足底筋膜（高跟鞋足底壓力）＆ 小腿腓腸肌（靜脈回流受阻）",
+        inflamedMuscles: ["calf", "foot", "lower-back"],
+        painPills: ["足底筋膜急性微撕裂", "比目魚肌僵硬水腫", "腰薦椎骨盆前傾", "膝超伸關節磨損"],
+        projection: "光雕視覺回饋：當你完成足跟踩地與抬腳，腳底地坪爆發如綠意泉水般的漣漪，沖走雙腿沉重疲倦！",
+        exercises: [
+          {
+            title: "櫃台推牆小腿阿基里斯腱伸展",
+            reps: "後腳跟踩實 · 左右各 20 秒",
+            desc: "雙手扶櫃台，一腳向前屈膝、另一腳向後跨大步踩穩，後腳跟完全貼地，感受小腿肚深層拉伸。",
+            tip: "💡 生活實用：交接班或空檔做一次，預防靜脈曲張與足底筋膜炎。"
+          },
+          {
+            title: "腳趾抓毛巾足弓喚醒操",
+            reps: "腳趾用力抓握放鬆 10 次",
+            desc: "利用腳趾做用力下抓、張開的動作，活絡足底深層小肌群，恢復足弓天然避震功能。",
+            tip: "💡 生活實用：休息室換鞋時立刻做，打通足底循環。"
+          }
+        ]
+      },
+      teacher: {
+        title: "講台站樁師（老師）",
+        quote: "「在講台前連站四節課，改紅字作業改到眼神呆滯，寫黑板肩膀抬到快變五十肩……」",
+        painZoneName: "右肩棘上肌（板書抬手疲勞）＆ 雙側腓腸肌（久站充血）",
+        inflamedMuscles: ["deltoid-r", "trapezius-r", "calf"],
+        painPills: ["板書肩關節滑囊水腫", "肩胛提肌攣縮", "小腿肚僵直結塊", "腰椎直立疲勞"],
+        projection: "光雕視覺回饋：當你在地坪完成單腳提踵與踏步時，腳下擴散出巨型漣漪，中央公園的花草隨著步伐全面綻放！",
+        exercises: [
+          {
+            title: "講桌扶手提踵小腿幫浦",
+            reps: "墊腳尖 8 次 · 慢下慢起",
+            desc: "雙手輕扶桌沿，腳跟慢慢抬高至最高點停留 1 秒，再緩慢著地。利用小腿肌肉充當人體第二心臟。",
+            tip: "💡 生活實用：下課回答學生問題時順便做，快速打通下肢靜脈回流。"
+          },
+          {
+            title: "黑板板書肩胛外旋放鬆",
+            reps: "向後畫大圈 8 次",
+            desc: "雙手自然垂放，肩膀由前向上、向後、向下畫大幅度圓圈，讓長期提筆板書的肩關節滑囊放鬆。",
+            tip: "💡 生活實用：每擦完一次黑板就做 3 圈，預防肩頸痠痛形成硬塊。"
+          }
+        ]
+      },
+      sales: {
+        title: "奪命奔走業務專員",
+        quote: "「一邊用肩膀夾電話一邊抄筆記，肩頸硬得像石頭；提著幾公斤樣品包追客戶，左右極度失衡……」",
+        painZoneName: "左側斜方肌（歪頭夾電話聳肩）＆ 右側闊背肌（單肩負重）",
+        inflamedMuscles: ["trapezius-l", "lats-r", "lower-back"],
+        painPills: ["單側聳肩巨大硬塊", "頸椎側彎小面關節卡住", "單肩背包骨盆歪斜", "胸廓旋轉代償"],
+        projection: "光雕視覺回饋：當你左右調整重心、完成脊椎釋放時，綠美圖純白建築天際線被光帶全面包覆，射出貫穿能量柱！",
+        exercises: [
+          {
+            title: "電話收線頸部抗阻歸位",
+            reps: "左右各輕壓 5 秒",
+            desc: "單手置於同側太陽穴旁輕輕施力，頭部保持中立與手掌做靜態等長對抗，重新喚醒頸部深層穩定肌。",
+            tip: "💡 生活實用：講完一通長電話立刻做，校正側歪的頸椎小面關節。"
+          },
+          {
+            title: "單肩包重力解壓縮開胸",
+            reps: "維持 20 秒深呼吸",
+            desc: "將常常背公事包的一側手臂向後背屈，另一手輕扣手肘後引，胸口前挺深呼吸，釋放胸小肌壓迫。",
+            tip: "💡 生活實用：進客戶辦公室前在電梯裡做一次，儀態立刻挺拔自信。"
+          }
+        ]
+      }
+    };
+
+    const board = document.getElementById('workoutBoard');
+    const cards = document.querySelectorAll('.role-card');
+
+    function renderDetail(roleKey) {
+      const data = roleDatabase[roleKey];
+      if (!data) return;
+
+      board.innerHTML = `
+        <div class="detail-scenario">
+          <span class="role-tag" style="background:#e06c3a; color:#fff; align-self: flex-start;">專屬生活處方箋</span>
+          <h3 class="character-name">${data.title}</h3>
+          <div class="humor-quote">${data.quote}</div>
+
+          <!-- 專業人體肌肉解剖學痠痛熱區視覺化看板 -->
+          <div class="muscle-heatmap-container">
+            <div class="heatmap-header">
+              <span class="heatmap-title">🔬 肌肉解剖學緊繃熱區診斷</span>
+              <div class="heatmap-legend">
+                <span>正常肌束</span>
+                <span class="legend-bar"></span>
+                <span>重度充血緊繃</span>
+              </div>
+            </div>
+            
+            <div style="font-size: 14px; font-weight:700; color:#b71c1c; margin-bottom: 8px;">
+              ▸ 受災核心肌群：${data.painZoneName}
+            </div>
+
+            <!-- SVG 肌肉解剖繪圖產生器 -->
+            <div class="anatomy-svg-box">
+              ${generateAnatomicalMuscleSVG(data.inflamedMuscles)}
+            </div>
+
+            <!-- 痛點標籤列表 -->
+            <div class="pain-tags-list" style="margin-top: 14px; display:flex; flex-wrap:wrap; gap:8px;">
+              ${data.painPills.map(p => `<span class="pain-pill">• ${p}</span>`).join('')}
+            </div>
+          </div>
+
+          <div class="projection-preview">
+            <strong>🎨 綠美圖展廳光雕回饋：</strong>
+            ${data.projection}
+          </div>
+        </div>
+
+        <div class="exercise-cards-list">
+          <div style="font-size: 16px; font-weight:700; color:var(--sage-dark); margin-bottom: 4px;">
+            👟 零負擔微肌力動作解法（現場影像辨識通關動作）
+          </div>
+          ${data.exercises.map((ex, i) => `
+            <div class="exercise-action-card">
+              <div class="action-header">
+                <h4>0${i+1} · ${ex.title}</h4>
+                <span class="reps-badge">${ex.reps}</span>
+              </div>
+              <p>${ex.desc}</p>
+              <div class="benefit-tip">${ex.tip}</div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    // 點擊事件綁定
+    cards.forEach(card => {
+      card.addEventListener('click', function(e) {
+        const targetCard = e.currentTarget;
+        const role = targetCard.getAttribute('data-role');
+
+        cards.forEach(c => {
+          c.classList.remove('active');
+          c.setAttribute('aria-selected', 'false');
+        });
+
+        targetCard.classList.add('active');
+        targetCard.setAttribute('aria-selected', 'true');
+        renderDetail(role);
+      });
+    });
+
+    /* 光雕動態模擬切換（骨架關節實質位移動畫 + 光斑互動） */
+    const stageStates = { 1: false, 2: false, 3: false };
+
+    function toggleStageSimulation(stageId) {
+      const box = document.getElementById('screenBox' + stageId);
+      const statusText = document.getElementById('stageStatus' + stageId);
+      const btn = document.getElementById('btnStage' + stageId);
+      stageStates[stageId] = !stageStates[stageId];
+
+      if (stageId === 1) {
+        if (stageStates[1]) {
+          box.classList.add('motion-squat-active');
+          statusText.textContent = "STAGE 01 · 正在深蹲起立 & 動脈爆發";
+          statusText.style.color = "#e5a93c";
+          btn.textContent = "停止動作模擬 ■";
+          btn.style.background = "#e06c3a";
+        } else {
+          box.classList.remove('motion-squat-active');
+          statusText.textContent = "STAGE 01 · 骨架判定中";
+          statusText.style.color = "#8da190";
+          btn.textContent = "啟動深蹲動作模擬 ⟳";
+          btn.style.background = "";
+        }
+      } else if (stageId === 2) {
+        if (stageStates[2]) {
+          box.classList.add('motion-wings-active');
+          statusText.textContent = "STAGE 02 · 正在 W-Y 展翅夾背 & 光羽綻放";
+          statusText.style.color = "#4ec9b0";
+          btn.textContent = "停止動作模擬 ■";
+          btn.style.background = "#e06c3a";
+        } else {
+          box.classList.remove('motion-wings-active');
+          statusText.textContent = "STAGE 02 · 展翅夾背中";
+          statusText.style.color = "#8da190";
+          btn.textContent = "啟動 W-Y 展翅手臂模擬 ⟳";
+          btn.style.background = "";
+        }
+      } else if (stageId === 3) {
+        if (stageStates[3]) {
+          box.classList.add('motion-bend-active');
+          statusText.textContent = "STAGE 03 · 正在側身拉伸 & 極光貫通";
+          statusText.style.color = "#3fa296";
+          btn.textContent = "停止動作模擬 ■";
+          btn.style.background = "#e06c3a";
+        } else {
+          box.classList.remove('motion-bend-active');
+          statusText.textContent = "STAGE 03 · 側身延展中";
+          statusText.style.color = "#8da190";
+          btn.textContent = "啟動側腰擺盪模擬 ⟳";
+          btn.style.background = "";
+        }
+      }
+    }
+
+    // 初始化渲染預設第 1 個角色
+    document.addEventListener('DOMContentLoaded', () => {
+      renderDetail('office');
+    });
+  </script>
+</body>
+</html>
